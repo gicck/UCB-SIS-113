@@ -1,4 +1,4 @@
-[Inicio](#inicio) · [Identificación](#identificación) · [Introduccion al curso](#introduccion-al-curso) · [Competencias](#competencias) · [Contenidos](#contenidos-(resumen)) · [Saberes](#saberes) · [Unidades](#unidades-de-aprendizaje) · [Recursos y Evaluación](#recursos-didácticos-y-evaluación) · [Referencias](#referencias-bibliográficas) 
+[Inicio](#inicio) · [Identificación](#identificación) · [Introduccion al curso](#introduccion-al-curso) · [Competencias](#competencias) · [Contenidos](#contenidos-(resumen)) · [Saberes](#saberes) · [Unidades](#unidades-de-aprendizaje) · [Recursos y Evaluación](#recursos-didácticos-y-evaluación) · [Referencias](#referencias-bibliográficas) · [Uso de la IA](#uso-de-inteligencia-artificial-en-el-curso) 
 
 # Programación II — Programa de estudios 
 
@@ -81,5 +81,29 @@ Evaluación diagnóstica y formativa. Productos sugeridos:
 - Bresnahan C., Blum R. (2015). Linux Essentials. John Wiley and Sons. 2ª Ed.  
 - [Overview of object oriented techniques in C#](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/)
 - [Object-Oriented programming (C#)](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/tutorials/oop)
+
+## Uso de Inteligencia Artificial en el curso
+
+La Inteligencia Artificial (IA) es una herramienta de apoyo que puede potenciar el aprendizaje y la productividad, pero su uso debe ser **ético, responsable y transparente**.
+
+### Cuándo se puede usar
+- Para **investigar conceptos** y obtener explicaciones adicionales.  
+- Para **generar ejemplos de código** que luego el estudiante analiza y adapta.  
+- Para **depurar errores** y recibir sugerencias de mejora.  
+- Para **documentar código** y mejorar la claridad de los proyectos.  
+
+### Cuándo NO se debe usar
+- Para **entregar código generado por IA sin entenderlo**.  
+- Para **resolver evaluaciones, exámenes o proyectos finales** sin participación activa del estudiante.  
+- Para **plagiar** contenido de terceros sin citar la fuente.  
+- Para **evadir el proceso de aprendizaje** o sustituir la práctica personal.  
+
+### Buenas prácticas de uso
+1. **Citar la herramienta** utilizada (por ejemplo: “Código base generado con ChatGPT y adaptado por el estudiante”).  
+2. **Verificar y probar** todo el código generado antes de usarlo.  
+3. **Comprender** cada línea de código o explicación obtenida.  
+4. **Combinar** la IA con investigación en documentación oficial y libros de referencia.  
+
+El objetivo es que la IA sea un **asistente de aprendizaje**, no un sustituto del esfuerzo y la creatividad del estudiante.
 
 ---
