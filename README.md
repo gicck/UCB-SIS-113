@@ -1,4 +1,4 @@
-[Inicio](#inicio) · [Identificación](#identificación) · [Introduccion al curso](#introduccion-al-curso) · [Competencias](#competencias) · [Contenidos](#contenidos-(resumen)) · [Saberes](#saberes) · [Unidades](#unidades-de-aprendizaje) · [Recursos y Evaluación](#recursos-didácticos-y-evaluación) · [Referencias](#referencias-bibliográficas) · [Uso de la IA](#uso-de-inteligencia-artificial-en-el-curso) 
+[Inicio](#inicio) · [Identificación](#identificación) · [Introduccion al curso](#introduccion-al-curso) · [Competencias](#competencias) · [Contenidos](#contenidos-resumen) · [Saberes](#saberes) · [Unidades](#unidades-de-aprendizaje) · [Recursos y Evaluación](#recursos-didácticos-y-evaluación) · [Referencias](#referencias-bibliográficas) · [Uso de la IA](#uso-de-inteligencia-artificial-en-el-curso) 
 
 # Programación II — Programa de estudios 
 
