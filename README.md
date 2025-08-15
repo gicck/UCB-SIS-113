@@ -56,12 +56,12 @@ Principales ejes temáticos trabajados en la asignatura:
 
 
 ## Unidades de aprendizaje
-0. Sistemas Operativos Linux, ShellScript
-1. Paradigma de la programación orientada a objetos  
-2. Encapsulamiento y Clases
-3. Herencia
-4. Polimorfismo
-5. Concurrencia
+1. Sistemas Operativos Linux y ShellScript - **[Apuntes](./Sistemas%20Operativos%20Linux%20y%20ShellScript/apuntes.md)**
+2. Paradigma de la programación orientada a objetos  
+3. Encapsulamiento y Clases
+4. Herencia
+5. Polimorfismo
+6. Concurrencia
 
 ## Recursos didácticos y evaluación
 
