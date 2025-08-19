@@ -25,6 +25,8 @@ Uso: `./reporte_errores.sh archivo.txt`
 Script: `comparar_config.sh`
 Uso: `./comparar_config.sh config1.txt config2.txt`
 
+-----
+
 Todos los scripts deberan ser entregados en un archivo `{nombre-completo}-tarea1.zip`
 
 ref: [zip](https://labex.io/tutorials/linux-linux-zip-command-with-practical-examples-423021?_gl=1*1nnj47v*_gcl_au*MTEzMzE4MDgzNC4xNzU1NDg4MjY3*_ga*NDYzMjI4MDYwLjE3NTU0ODgyMzA.*_ga_ZFCX52ZJTZ*czE3NTU2MDY4MjgkbzIkZzEkdDE3NTU2MTA0ODYkajYwJGwwJGgw) - 
