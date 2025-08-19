@@ -3,6 +3,8 @@
 A partir de las consignas de `generar_paquete.sh`
 Entregar las actividades de la siguiente manera
 
+ref: [BASH Positional-Parameters](https://www.gnu.org/software/bash/manual/bash.html#Positional-Parameters)
+
 ## Actividad 1 — Organización de datos de sensores
 
 Script: `organiza_sensores.sh`
