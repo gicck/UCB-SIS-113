@@ -71,14 +71,14 @@ proyecto_mecatronica/
 └── evaluar.sh
 ```
 
-# Martes 19/08
+# Martes 19/08 - Miercoles 20/08
 
 - [Shell Command Language](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02)
 - [Bash Features](https://www.gnu.org/software/bash/manual/bash.html#Positional-Parameters)
 
 **Bash: (Bourne SHELL -> BASH)** Command Language Interpreter tambien conocido como SHELL.
 
-![alt text](image.png)
+![alt text](./os.png)
 Al correr un commmando este es interpretado por SHELL para despues ser ejecutado en el sistema operativo (OS).
 
 `which $SHELL` -> para ver que SHELL se utiliza "BASH, ZSH, etc".
