@@ -1,3 +1,5 @@
+# 26/08
+
 # C# OOP Abstraction Practice Exercises
 
 ## Ejercicio 1: Sistema Bancario
@@ -26,8 +28,7 @@ static void Deposit(int accountNumber, decimal amount)
 }
 ```
 
-### OOP Conversion (Abstraction Applied)
-
+### Conversion a POO (Abstraccion Applicada)
 
 ## Ejercicio 2: Sistema de Gestión de Biblioteca
 
@@ -57,6 +58,133 @@ static int FindBookIndex(string title)
 
 ### OOP Conversion (Abstraction Applied)
 
+```csharp
+// Abstract representation of a Book
+public class Book
+{
+    // Private fields - hiding internal structure
+    private string _title;
+    private string _author;
+    private string _isbn;
+    private bool _isAvailable;
+
+    public Book(string title, string author, string isbn)
+    {
+        _title = title;
+        _author = author;
+        _isbn = isbn;
+        _isAvailable = true; // New books are available
+    }
+
+    // Simple interface for book operations
+    public bool Borrow()
+    {
+        if (_isAvailable)
+        {
+            _isAvailable = false;
+            Console.WriteLine($"'{_title}' has been borrowed.");
+            return true;
+        }
+        Console.WriteLine($"'{_title}' is not available.");
+        return false;
+    }
+
+    public void Return()
+    {
+        _isAvailable = true;
+        Console.WriteLine($"'{_title}' has been returned.");
+    }
+
+    public void DisplayInfo()
+    {
+        string status = _isAvailable ? "Available" : "Borrowed";
+        Console.WriteLine($"'{_title}' by {_author} | ISBN: {_isbn} | Status: {status}");
+    }
+
+    // Properties for controlled access
+    public string Title => _title;
+    public string Author => _author;
+    public bool IsAvailable => _isAvailable;
+}
+
+// Library class managing the book collection
+public class Library
+{
+    private List<Book> _books = new List<Book>();
+
+    public void AddBook(string title, string author, string isbn)
+    {
+        var book = new Book(title, author, isbn);
+        _books.Add(book);
+        Console.WriteLine($"Added '{title}' to library.");
+    }
+
+    public Book SearchBook(string title)
+    {
+        return _books.FirstOrDefault(book => 
+            book.Title.ToLower().Contains(title.ToLower()));
+    }
+
+    public void DisplayAllBooks()
+    {
+        Console.WriteLine("Library Catalog:");
+        foreach (var book in _books)
+        {
+            book.DisplayInfo();
+        }
+    }
+
+    public void BorrowBook(string title)
+    {
+        var book = SearchBook(title);
+        book?.Borrow();
+    }
+
+    public void ReturnBook(string title)
+    {
+        var book = SearchBook(title);
+        book?.Return();
+    }
+}
+```
+
+**Beneficios de la Abstracción:**
+
+- El estado interno del libro está oculto y se gestiona internamente
+- Los usuarios interactúan a través de métodos simples: Borrow(), Return(), DisplayInfo()
+- La complejidad de la búsqueda está abstraída dentro de la clase Library
+- No es necesario gestionar manualmente los arreglos paralelos
+
+---
+
+### Aplicacion de Herencia
+
+Tu clase Libro existente funciona bien, pero la biblioteca ahora necesita gestionar diferentes tipos de medios con comportamientos especializados:
+
+#### Requisitos extendidos:
+
+**Múltiples tipos de medios:** libros, DVD y revistas.
+
+**Diferentes reglas de préstamo:** cada tipo de medio tiene diferentes períodos de préstamo.
+
+**Propiedades especializadas:** los DVD tienen directores y duración, las revistas tienen números de edición, etc.
+
+**Tarifas por mora variadas:** diferentes estructuras de penalización para cada tipo de medio.
+
+**Formatos de visualización:** cada tipo de medio muestra información diferente.
+
+### Paso 1: Identificar qué debe heredarse
+
+Al observar tu clase Libro actual, identifica los comportamientos comunes que compartirán todos los tipos de medios:
+ - Título, estado de disponibilidad
+ - Métodos `Borrow()` y `Return()`
+ - Funcionalidad básica de visualización
+
+Y los comportamientos especializados que diferirán:
+
+ - Períodos de préstamo (libros: 14 días, DVD: 7 días, revistas: 3 días)
+ - Cálculos de tarifas por mora
+ - Propiedades específicas (autor vs. director vs. número de edición)
 
 ---
 
@@ -83,6 +211,135 @@ static double CalculateAverage(int studentIndex) { /* Loop and calculate */ }
 
 ### OOP Conversion (Abstraction Applied)
 
+```csharp
+// Abstract representation of a grade for a subject
+public class Grade
+{
+    public string Subject { get; private set; }
+    public double Score { get; private set; }
+
+    public Grade(string subject, double score)
+    {
+        Subject = subject;
+        Score = Math.Max(0, Math.Min(100, score)); // Ensure valid range
+    }
+}
+
+// Abstract representation of a Student
+public class Student
+{
+    private string _name;
+    private List<Grade> _grades = new List<Grade>();
+
+    public Student(string name)
+    {
+        _name = name;
+    }
+
+    // Simple interface for grade operations
+    public void AddGrade(string subject, double score)
+    {
+        var grade = new Grade(subject, score);
+        _grades.Add(grade);
+        Console.WriteLine($"Added grade {score} for {subject} to {_name}");
+    }
+
+    // Abstracted calculation - user doesn't need to know the formula
+    public double CalculateAverage()
+    {
+        if (_grades.Count == 0) return 0;
+        return _grades.Average(g => g.Score);
+    }
+
+    public string GetLetterGrade()
+    {
+        double avg = CalculateAverage();
+        return avg switch
+        {
+            >= 90 => "A",
+            >= 80 => "B",
+            >= 70 => "C",
+            >= 60 => "D",
+            _ => "F"
+        };
+    }
+
+    public void DisplayReport()
+    {
+        Console.WriteLine($"\n--- Report for {_name} ---");
+        foreach (var grade in _grades)
+        {
+            Console.WriteLine($"{grade.Subject}: {grade.Score}");
+        }
+        Console.WriteLine($"Average: {CalculateAverage():F2}");
+        Console.WriteLine($"Letter Grade: {GetLetterGrade()}");
+    }
+
+    public string Name => _name;
+    public int GradeCount => _grades.Count;
+}
+
+// Class to manage multiple students
+public class GradeBook
+{
+    private List<Student> _students = new List<Student>();
+
+    public Student AddStudent(string name)
+    {
+        var student = new Student(name);
+        _students.Add(student);
+        Console.WriteLine($"Student '{name}' added to gradebook.");
+        return student;
+    }
+
+    public Student FindStudent(string name)
+    {
+        return _students.FirstOrDefault(s => 
+            s.Name.ToLower() == name.ToLower());
+    }
+
+    public void DisplayClassReport()
+    {
+        Console.WriteLine("=== CLASS REPORT ===");
+        foreach (var student in _students)
+        {
+            student.DisplayReport();
+        }
+    }
+}
+```
+**Beneficios de la Abstracción:**
+
+- El cálculo complejo del promedio está oculto dentro de los métodos
+- La lógica de conversión a calificación en letras está abstraída
+- Los estudiantes no necesitan saber cómo se almacenan internamente las calificaciones
+- Interfaz limpia: AddGrade(), CalculateAverage(), DisplayReport()
+---
+
+### Aplicacion de Herencia
+
+Tu clase Estudiante actual funciona para escenarios básicos, pero la escuela ahora necesita manejar diferentes categorías de estudiantes con reglas especializadas:
+
+#### Requisitos extendidos:
+- Múltiples tipos de estudiantes: pregrado, posgrado y estudiantes de intercambio
+- Diferentes cálculos de GPA: los de pregrado usan la escala de 4.0, los de posgrado tienen cursos ponderados
+- Requisitos de graduación: diferentes requisitos de créditos y GPA según el tipo de estudiante
+- Propiedades especializadas: los de posgrado tienen requisitos de tesis, los de intercambio tienen universidades de origen
+
+#### Paso 1: Identificar oportunidades de herencia
+
+De tu clase Estudiante actual, extrae:
+
+Comportamientos comunes:
+- Nombre, número de estudiante (ID)
+- Agregar calificaciones
+- Almacenamiento básico de calificaciones
+
+Comportamientos especializados:
+
+- Métodos de cálculo de GPA - Diferente implementacion para cadaa tipo de estudiante
+- Reglas de elegibilidad para graduación 
+- Determinación de la situación académica 
 ---
 
 ## Ejercicio 4: Sistema de Gestión de Inventario
@@ -106,6 +363,145 @@ static decimal CalculateTotalValue() { /* Loop through all products */ }
 ```
 
 ### OOP Conversion (Abstraction Applied)
+
+```csharp
+// Abstract representation of a Product
+public class Product
+{
+    private string _name;
+    private int _quantity;
+    private decimal _price;
+    private string _category;
+
+    public Product(string name, int quantity, decimal price, string category)
+    {
+        _name = name;
+        _quantity = Math.Max(0, quantity); // Ensure non-negative
+        _price = Math.Max(0, price);       // Ensure non-negative
+        _category = category;
+    }
+
+    // Simple operations on the product
+    public bool RemoveStock(int amount)
+    {
+        if (amount <= _quantity && amount > 0)
+        {
+            _quantity -= amount;
+            Console.WriteLine($"Removed {amount} units of {_name}. Remaining: {_quantity}");
+            return true;
+        }
+        Console.WriteLine($"Cannot remove {amount} units. Available: {_quantity}");
+        return false;
+    }
+
+    public void AddStock(int amount)
+    {
+        if (amount > 0)
+        {
+            _quantity += amount;
+            Console.WriteLine($"Added {amount} units of {_name}. New quantity: {_quantity}");
+        }
+    }
+
+    public decimal GetTotalValue()
+    {
+        return _quantity * _price;
+    }
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"{_name} | Category: {_category} | Qty: {_quantity} | Price: ${_price} | Total Value: ${GetTotalValue()}");
+    }
+
+    public bool IsLowStock(int threshold = 5)
+    {
+        return _quantity <= threshold;
+    }
+
+    // Properties for controlled access
+    public string Name => _name;
+    public int Quantity => _quantity;
+    public decimal Price => _price;
+    public string Category => _category;
+}
+
+// Inventory management system
+public class Inventory
+{
+    private List<Product> _products = new List<Product>();
+
+    public void AddProduct(string name, int quantity, decimal price, string category)
+    {
+        var product = new Product(name, quantity, price, category);
+        _products.Add(product);
+        Console.WriteLine($"Product '{name}' added to inventory.");
+    }
+
+    public Product FindProduct(string name)
+    {
+        return _products.FirstOrDefault(p => 
+            p.Name.ToLower() == name.ToLower());
+    }
+
+    public decimal CalculateTotalInventoryValue()
+    {
+        return _products.Sum(p => p.GetTotalValue());
+    }
+
+    public void DisplayLowStockItems(int threshold = 5)
+    {
+        Console.WriteLine($"Low Stock Items (≤{threshold} units):");
+        var lowStockItems = _products.Where(p => p.IsLowStock(threshold));
+        
+        foreach (var product in lowStockItems)
+        {
+            product.DisplayInfo();
+        }
+    }
+
+    public void DisplayInventoryByCategory(string category)
+    {
+        Console.WriteLine($"Products in '{category}' category:");
+        var categoryProducts = _products.Where(p => 
+            p.Category.ToLower() == category.ToLower());
+            
+        foreach (var product in categoryProducts)
+        {
+            product.DisplayInfo();
+        }
+    }
+
+    public void DisplayFullInventory()
+    {
+        Console.WriteLine("=== FULL INVENTORY ===");
+        foreach (var product in _products)
+        {
+            product.DisplayInfo();
+        }
+        Console.WriteLine($"Total Inventory Value: ${CalculateTotalInventoryValue()}");
+    }
+}
+```
+
+**Beneficios de la Abstracción:**
+- La lógica de validación del stock está oculta dentro de los métodos
+- Los cálculos complejos de inventario están abstraídos
+- Los usuarios interactúan a través de métodos simples: AddStock(), RemoveStock(), DisplayInfo()
+- El mecanismo de almacenamiento interno está completamente oculto
+- La lógica de negocio (como alertas de bajo stock) está encapsulada dentro de las clases
+
+---
+
+
+### Aplicacion de Herencia
+La clase Producto actual maneja el inventario básico, pero la tienda ahora necesita categorías de productos especializadas con diferentes reglas de negocio:
+
+Requisitos extendidos:
+
+- Categorías de productos: perecederos, electrónicos, ropa
+- Precios dinámicos: los perecederos obtienen descuentos cerca de la fecha de vencimiento, los electrónicos tienen ventas por temporada
+- Propiedades especializadas: fechas de caducidad, períodos de garantía, tallas, etc.
+- Cálculos de envío: artículos frágiles, según peso, envío exprés para perecederos
 
 ---
 
