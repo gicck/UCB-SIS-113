@@ -521,3 +521,53 @@ Requisitos extendidos:
 - Pregunta: "¿Qué debería poder hacer el usuario?" (métodos públicos)
 - Pregunta: "¿Qué debería estar oculto?" (campos/métodos privados)
 
+# Semana 6 
+
+**Tema:** Abstracción y Encapsulamiento  
+**Objetivo:** Practicar la creación de clases que ocultan sus detalles internos y exponen interfaces claras mediante métodos públicos.  
+**Nota:** No es necesario usar herencia ni polimorfismo en estos ejercicios.  
+
+---
+
+## Ejercicio 1: Sistema de Reservas de Cine  
+Diseña un sistema para gestionar reservas de entradas en un cine.  
+- Cada sala tiene un número limitado de asientos.  
+- El sistema debe permitir reservar un asiento, cancelar una reserva y mostrar los asientos disponibles.  
+
+Puntos clave:  
+- El usuario **no debe manipular directamente** la lista de asientos.  
+- La verificación de si un asiento está libre **debe estar encapsulada** en la clase correspondiente.  
+- Interfaz pública clara (ej. `ReservarAsiento()`, `CancelarReserva()`, `MostrarDisponibles()`).  
+
+---
+
+## Ejercicio 2: Agenda de Contactos  
+Diseña un sistema para manejar contactos dentro de una agenda digital.  
+- Cada contacto cuenta con nombre, número de teléfono y correo electrónico.  
+- El usuario debe poder agregar contactos, buscar un contacto específico y mostrar todos los contactos almacenados.  
+
+Puntos clave:  
+- La lista interna de contactos **no es accesible directamente** por el usuario.  
+- Se deben usar métodos como `AgregarContacto()`, `BuscarContacto()`, `MostrarContactos()`.  
+- El encapsulamiento asegura que los contactos solo pueden gestionarse mediante los métodos públicos definidos.  
+
+--- 
+
+## Ejercicio 3: Sistema de Control de Estacionamiento
+
+Diseña un sistema que gestione un estacionamiento para automóviles.
+- Cada vehículo tiene placa, modelo y hora de entrada.
+- El sistema debe permitir registrar la entrada de un vehículo, registrar su salida y calcular el monto a pagar según el tiempo de estacionamiento.
+
+Puntos clave:
+- Los datos internos como hora de entrada y tarifa por hora deben estar encapsulados y no pueden modificarse directamente.
+- La lógica de cálculo del monto a pagar (basada en las horas) debe estar oculta dentro de un método como `CalcularPago()`.
+- El usuario solo debe interactuar con métodos públicos como:
+	- `RegistrarEntrada()`, `RegistrarSalida()`, `MostrarVehiculos()`.
+
+---
+
+1. **Fase de Diseño sin código:**   
+2. **Dinámica por Equipos:**  
+3. **Iteración de Mejoras:**  
+4. **Role Play "Usuarios vs. Diseñadores":**  
