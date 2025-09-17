@@ -1,0 +1,41 @@
+#!/bin/bash
+# Script: crear_log_seguridad.sh
+# Crea un archivo de log simulado para análisis de seguridad
+
+echo "Creando archivo de log de seguridad simulado..."
+
+cat > access.log << 'EOF'
+2024-01-15 08:23:15 192.168.1.100 LOGIN_SUCCESS user1 ssh
+2024-01-15 08:25:42 10.0.0.50 LOGIN_FAILED admin ssh
+2024-01-15 08:27:33 192.168.1.100 LOGIN_SUCCESS user1 web
+2024-01-15 08:30:11 10.0.0.50 LOGIN_FAILED root ssh
+2024-01-15 08:32:55 203.0.113.25 LOGIN_FAILED admin web
+2024-01-15 08:35:20 192.168.1.100 LOGIN_SUCCESS user1 ftp
+2024-01-15 08:37:44 10.0.0.50 LOGIN_FAILED admin ssh
+2024-01-15 08:40:12 203.0.113.25 LOGIN_FAILED root web
+2024-01-15 08:42:33 192.168.1.101 LOGIN_SUCCESS user2 ssh
+2024-01-15 08:45:18 10.0.0.50 LOGIN_FAILED admin ssh
+2024-01-15 09:12:44 203.0.113.25 LOGIN_FAILED admin web
+2024-01-15 09:15:22 192.168.1.102 LOGIN_SUCCESS user3 web
+2024-01-15 09:18:55 10.0.0.50 LOGIN_SUCCESS admin ssh
+2024-01-15 09:22:10 203.0.113.25 LOGIN_FAILED root web
+2024-01-15 09:25:33 192.168.1.100 LOGIN_SUCCESS user1 ssh
+2024-01-15 09:28:44 10.0.0.50 LOGIN_FAILED admin ssh
+2024-01-15 09:32:11 203.0.113.25 LOGIN_FAILED admin web
+2024-01-15 09:35:55 192.168.1.103 LOGIN_SUCCESS user4 ftp
+2024-01-15 10:42:33 203.0.113.25 LOGIN_FAILED root ssh
+2024-01-15 10:45:12 10.0.0.50 LOGIN_FAILED admin web
+2024-01-15 10:48:44 192.168.1.100 LOGIN_SUCCESS user1 web
+2024-01-15 10:52:22 203.0.113.25 LOGIN_FAILED admin ssh
+2024-01-15 10:55:33 10.0.0.50 LOGIN_SUCCESS admin ssh
+2024-01-15 11:15:44 203.0.113.25 LOGIN_FAILED root web
+2024-01-15 11:18:22 192.168.1.104 LOGIN_SUCCESS user5 ssh
+EOF
+
+echo "Archivo access.log creado con $(wc -l < access.log) entradas"
+echo ""
+echo "=== VISTA PREVIA DEL LOG ==="
+head -5 access.log
+echo "..."
+echo ""
+echo "Formato: FECHA HORA IP ESTADO USUARIO SERVICIO"
