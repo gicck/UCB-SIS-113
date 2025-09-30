@@ -571,3 +571,192 @@ Puntos clave:
 2. **Dinámica por Equipos:**  
 3. **Iteración de Mejoras:**  
 4. **Role Play "Usuarios vs. Diseñadores":**  
+
+
+# Semana 9
+
+Polimorfismo en C#
+Objetivo: Aplicar polimorfismo para extender los sistemas desarrollados permitiendo múltiples implementaciones de comportamientos comunes.
+
+## Ejercicio: Agenda de Contactos con Polimorfismo
+Contexto Previo
+Requisitos Extendidos con Polimorfismo
+La agenda ahora debe manejar:
+
+- Contactos Personales: con fecha de cumpleaños y relación familiar
+- Contactos Profesionales: con empresa, cargo y extensión
+- Contactos de Emergencia: con tipo de emergencia y disponibilidad 24/7
+
+**Comportamientos Polimórficos Requeridos:**
+
+1. Método `MostrarInformacion()`: Cada tipo de contacto debe mostrar información diferente
+2. Método `EsDisponible(DateTime hora)`:
+  - Personales: solo en horario social (9 AM - 9 PM)
+  - Profesionales: solo en horario laboral (8 AM - 6 PM)
+  - Emergencia: disponible 24/7
+3. Método `ObtenerPrioridad()`:
+  - Emergencia: Alta
+  - Profesional: Media
+  - Personal: Baja
+
+```c#
+// Implementa la jerarquía de clases utilizando polimorfismo
+public abstract class Contacto
+{
+    // Propiedades comunes
+    protected string nombre;
+    protected string telefono;
+    protected string email;
+    
+    // Constructor base
+    public Contacto(string nombre, string telefono, string email)
+    {
+        // ...implementar
+    }
+    
+    // Métodos virtuales/abstractos para polimorfismo
+    public abstract void MostrarInformacion();
+    public abstract bool EsDisponible(DateTime hora);
+    public abstract string ObtenerPrioridad();
+}
+
+public class ContactoPersonal : Contacto
+{
+    private DateTime fechaCumpleanos;
+    private string relacion;
+    
+    // Implementar constructor y métodos polimórficos
+}
+
+public class ContactoProfesional : Contacto
+{
+    private string empresa;
+    private string cargo;
+    private int extension;
+    
+    // Implementar constructor y métodos polimórficos
+}
+
+public class ContactoEmergencia : Contacto
+{
+    private string tipoEmergencia;
+    
+    // Implementar constructor y métodos polimórficos
+}
+
+public class Agenda
+{
+    private List<Contacto> contactos = new List<Contacto>();
+    
+    // Métodos que trabajen con polimorfismo
+    public void MostrarContactosDisponibles(DateTime hora)
+    {
+        // Usar polimorfismo para verificar disponibilidad
+    }
+    
+    public void MostrarContactosPorPrioridad()
+    {
+        // Usar polimorfismo para ordenar por prioridad
+    }
+}
+```
+
+
+## Ejercicio: Sistema de Transporte Urbano
+
+### Contexto
+Una empresa de transporte urbano necesita un sistema para gestionar diferentes tipos de vehículos de transporte público con tarifas, capacidades y reglas operativas específicas.
+
+Requisitos Base con Herencia
+**Tipos de Vehículos:**
+
+- Autobús Urbano: capacidad 40 pasajeros, tarifa fija, rutas específicas
+- Metrobus: capacidad 120 pasajeros, tarifa por distancia, vías exclusivas
+- Taxi: capacidad 4 pasajeros, tarifa por tiempo + distancia, servicio directo
+- Bicicleta Pública: capacidad 1 persona, tarifa por minutos, estaciones fijas
+
+Comportamientos Polimórficos Requeridos:
+
+1. `CalcularTarifa(double distancia, int tiempoMinutos)`:
+  - Autobús: tarifa fija $15 independiente de distancia/tiempo
+  - Metrobus: $8 base + $2 por cada 5km
+  - Taxi: $25 base + $3 por minuto + $1.50 por km
+  - Bicicleta: $5 por cada 15 minutos o fracción
+
+2. `VerificarDisponibilidad(DateTime momento):`
+  - Autobús: 5:00 AM - 11:00 PM
+  - Metrobus: 6:00 AM - 10:00 PM
+  - Taxi: 24/7
+  - Bicicleta: 6:00 AM - 8:00 PM
+
+3. `ObtenerCapacidadDisponible():`
+  - Cada tipo maneja ocupación diferente
+  - Retorna espacios libres actuales
+
+4. `MostrarInformacionViaje():`
+  - Cada tipo muestra información específica del servicio
+
+
+Implementación Requerida:
+```c#
+public abstract class VehiculoTransporte
+{
+    protected string identificador;
+    protected int capacidadMaxima;
+    protected int pasajerosActuales;
+    protected bool enServicio;
+    
+    public VehiculoTransporte(string identificador, int capacidadMaxima)
+    {
+        // Implementar constructor base
+    }
+    
+    // Métodos abstractos para polimorfismo
+    public abstract decimal CalcularTarifa(double distanciaKm, int tiempoMinutos);
+    public abstract bool VerificarDisponibilidad(DateTime momento);
+    public abstract void MostrarInformacionViaje();
+    
+    // Métodos virtuales que pueden ser sobrescritos
+    public virtual bool SubirPasajeros(int cantidad)
+    {
+        // Implementación base para validar capacidad
+    }
+    
+    public virtual bool BajarPasajeros(int cantidad)
+    {
+        // Implementación base
+    }
+    
+    public int ObtenerCapacidadDisponible()
+    {
+        return capacidadMaxima - pasajerosActuales;
+    }
+}
+
+// Implementar las clases derivadas:
+public class AutobusUrbano : VehiculoTransporte { }
+public class Metrobus : VehiculoTransporte { }
+public class TaxiUrbano : VehiculoTransporte { }
+public class BicicletaPublica : VehiculoTransporte { }
+
+public class SistemaTransporte
+{
+    private List<VehiculoTransporte> flota = new List<VehiculoTransporte>();
+    
+    public void CalcularMejorOpcion(double distancia, int tiempo, DateTime momento)
+    {
+        // Usar polimorfismo para encontrar la opción más económica disponible
+    }
+    
+    public void MostrarVehiculosDisponibles(DateTime momento)
+    {
+        // Mostrar solo vehículos disponibles en el momento dado
+    }
+    
+    public void GenerarReporteFlota()
+    {
+        // Usar polimorfismo para mostrar información de toda la flota
+    }
+}
+```
+
