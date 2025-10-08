@@ -661,6 +661,51 @@ public class Agenda
 }
 ```
 
+| Situación | Usa... | Ejemplo |
+|-----------|--------|---------|
+| La clase base puede existir por sí sola | Herencia simple | Empleado → EmpleadoTiempoCompleto | 
+| La clase base es demasiado genérica | Clase abstracta | Figura → Circulo, Cuadrado | 
+| Solo necesitas un contrato | Interfaz | IComparable, IDisposable |
+| Quieres compartir código común | Clase abstracta | Interfaz con esteroides | 
+| Necesitas herencia múltiple | Interfaces | C# no permite herencia múltiple |
+
+
+
+Agrega a tu agenda este sistema de etiquetas:
+
+```csharp
+// ¿Debería ser abstracta o concreta? ¡TÚ decides!
+public ??? class Etiqueta
+{
+    public string Nombre { get; set; }
+    public string Color { get; set; }
+    
+    // ¿Virtual, abstracto o normal?
+    public ??? void Aplicar(Contacto contacto)
+    {
+        // ¿Qué va aquí?
+    }
+}
+
+public class EtiquetaFavorito : Etiqueta
+{
+    // Contactos favoritos tienen estrella dorada
+}
+
+public class EtiquetaBloqueado : Etiqueta
+{
+    // Contactos bloqueados no pueden llamar
+}
+```
+
+Preguntas para reflexionar:
+
+- ¿Tiene sentido crear una "etiqueta" genérica sin tipo específico?
+- ¿Todos los tipos de etiqueta se aplican igual?
+- ¿Necesitas código compartido o solo un contrato?
+
+
+
 
 ## Ejercicio: Sistema de Transporte Urbano
 
