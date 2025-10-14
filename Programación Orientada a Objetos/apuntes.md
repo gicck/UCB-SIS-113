@@ -805,3 +805,53 @@ public class SistemaTransporte
 }
 ```
 
+#### DETONANTE
+
+"La alcaldía cambió la ley: TODOS los vehículos ahora deben registrar cada viaje en una base de datos para estadísticas de movilidad"
+
+PROBLEMA:
+
+- Tienen que agregar método RegistrarViaje() en Autobús 
+- Tienen que agregar método RegistrarViaje() en Taxi 
+- Mañana agregarán Metrobus... tendrán que agregar otra vez 
+- Si cambia el formato del registro, modificar 3+ clases
+
+"¿Cómo podríamos escribir el código de RegistrarViaje() UNA SOLA VEZ y que todos lo hereden?"
+
+
+#### Refactorización a Clase Abstracta
+
+PREGUNTA: "¿Qué cosas pueden ir en la clase base y cuáles deben ser abstractas?"
+
+### Capacidades Opcionales
+
+"La ciudad quiere integración con apps de mapas. ALGUNOS vehículos pueden ser rastreados en tiempo real (GPS), otros no."
+
+
+| Vehículo     | GPS     | WiFi | Reservar | Pagar App |
+| ------------|---------|-------|--------- |----------|
+| Autobus      |   ❌    |  ✅  |    ❌    |    ❌    |
+| Taxi         |   ✅    |  ✅  |    ✅    |    ✅    |
+| Metrobus     |   ✅    |  ❌  |    ❌    |    ❌    |
+| Bicicleta    |   ✅    |  ❌  |    ✅    |    ✅    |
+
+```c#
+public abstract class VehiculoTransporte
+{
+    public abstract Ubicacion ObtenerUbicacionGPS(); // ❌ Autobus no tiene GPS
+    public abstract void ReservarViaje(); // ❌ Metrobus no se reserva
+}
+```
+
+- Autobus tendría que implementar ObtenerUbicacionGPS() ¡cuando no tiene GPS!
+
+- Metrobus tendría que implementar ReservarViaje() ¡cuando no se reserva!
+
+"¿Cómo modelamos capacidades que solo ALGUNOS tienen?"
+
+--------
+"Todos los vehículos necesitan mantenimiento periódico, pero cada tipo tiene intervalos diferentes"
+
+"Algunos vehículos ahora son eléctricos y necesitan recarga. El Metrobus siempre fue eléctrico, pero ahora también hay Taxis eléctricos y Bicicletas eléctricas"
+
+"Algunos vehículos tienen rampa para sillas de ruedas"
