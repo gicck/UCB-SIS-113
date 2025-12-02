@@ -84,6 +84,32 @@ namespace ParallelAsyncExample
             return byteArray.Length;
         }
 
+        //  private async void OnStartButtonClick(object sender, RoutedEventArgs e)
+        // {
+        //     _startButton.IsEnabled = false;
+        //     _resultsTextBox.Clear();
+
+        //     var stopwatch = Stopwatch.StartNew();
+
+        //     // Start all downloads in parallel
+        //     IEnumerable<Task<int>> downloadTasks =
+        //         from url in _urlList
+        //         select ProcessUrlAsync(url, _client);
+
+        //     // Wait for all to complete
+        //     int[] lengths = await Task.WhenAll(downloadTasks);
+        //     int total = lengths.Sum();
+
+        //     stopwatch.Stop();
+
+        //     // Update UI (we're already on the UI thread!)
+        //     _resultsTextBox.Text += $"\nTotal bytes returned:  {total:#,#}";
+        //     _resultsTextBox.Text += $"\nElapsed time:          {stopwatch.Elapsed}\n";
+        //     _resultsTextBox.Text += $"\nControl returned to {nameof(OnStartButtonClick)}.";
+            
+        //     _startButton.IsEnabled = true;
+        // }
+
         private Task DisplayResultsAsync(string url, byte[] content) =>
             Dispatcher.BeginInvoke(() =>
                 _resultsTextBox.Text += $"{url,-60} {content.Length,10:#,#}\n")
